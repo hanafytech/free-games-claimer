@@ -47,12 +47,11 @@ This fork builds upon previous versions to add English localization and reduce n
 
 <div align="center">
 
-| <img src="https://cdn.simpleicons.org/epicgames/white" width="40"/><br/>**Epic Games** | <img src="https://cdn.simpleicons.org/amazonprime/white" width="40"/><br/>**Prime Gaming** | <img src="https://cdn.simpleicons.org/gogdotcom/white" width="40"/><br/>**GOG** | <img src="https://cdn.simpleicons.org/steam/white" width="40"/><br/>**Steam** | <img src="https://cdn.simpleicons.org/aliexpress/white" width="40"/><br/>**AliExpress** |
+| <img src="https://cdn.simpleicons.org/epicgames/white" width="40"/><br/>**Epic Games** | <img src="https://img.icons8.com/ios-filled/50/FFFFFF/amazon.png" width="40"/><br/>**Prime Gaming** | <img src="https://cdn.simpleicons.org/gogdotcom/white" width="40"/><br/>**GOG** | <img src="https://cdn.simpleicons.org/steam/white" width="40"/><br/>**Steam** | <img src="https://cdn.simpleicons.org/aliexpress/white" width="40"/><br/>**AliExpress** |
 |:---:|:---:|:---:|:---:|:---:|
 | FreeGames | FreeGames | FreeGames | FreeGames | Points |
 
 </div>
-
 ---
 
 ## 🚀 Quick Start
