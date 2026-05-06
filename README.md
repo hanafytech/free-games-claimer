@@ -47,7 +47,7 @@ This fork builds upon previous versions to add English localization and reduce n
 
 <div align="center">
 
-| <img src="[https://github.com/user-attachments/assets/82e9e9bf-b6ac-4f20-91db-36d2c8429cb6](https://github.com/user-attachments/assets/82e9e9bf-b6ac-4f20-91db-36d2c8429cb6)" width="40"/><br/>**Epic Games** | <img src="[https://github.com/user-attachments/assets/7627a108-20c6-4525-a1d8-5d221ee89d6e](https://github.com/user-attachments/assets/7627a108-20c6-4525-a1d8-5d221ee89d6e)" width="40"/><br/>**Prime Gaming** | <img src="[https://github.com/user-attachments/assets/49040b50-ee14-4439-8e3c-e93cafd7c3a5](https://github.com/user-attachments/assets/49040b50-ee14-4439-8e3c-e93cafd7c3a5)" width="40"/><br/>**GOG** | <img src="[https://github.com/user-attachments/assets/3582444b-f23b-448d-bf31-01668cd0313a](https://github.com/user-attachments/assets/3582444b-f23b-448d-bf31-01668cd0313a)" width="40"/><br/>**Steam** | 🛒<br/>**AliExpress** |
+| <img src="https://cdn.simpleicons.org/epicgames/white" width="40"/><br/>**Epic Games** | <img src="https://cdn.simpleicons.org/amazonprime/white" width="40"/><br/>**Prime Gaming** | <img src="https://cdn.simpleicons.org/gogdotcom/white" width="40"/><br/>**GOG** | <img src="https://cdn.simpleicons.org/steam/white" width="40"/><br/>**Steam** | <img src="https://cdn.simpleicons.org/aliexpress/white" width="40"/><br/>**AliExpress** |
 |:---:|:---:|:---:|:---:|:---:|
 | FreeGames | FreeGames | FreeGames | FreeGames | Points |
 
