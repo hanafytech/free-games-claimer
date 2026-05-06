@@ -1,11 +1,11 @@
 /**
- * One-shot runner z powiadomieniami Discord dla startu / braku gier / błędów.
+ * One-shot runner with Discord notifications for start / no games / errors.
  *
- * Powiadomienia o sukcesie (✅) wysyła już util.notify() w każdym skrypcie platformy.
- * Ten plik obsługuje tylko: start kontenera, brak gier, błąd + screenshot.
+ * Success notifications (✅) are already sent by util.notify() in each platform script.
+ * This file handles only: container start, no games, error + screenshot.
  *
- * Użycie: node run.js <skrypt1> <skrypt2> ...
- * Przykład: node run.js prime-gaming gog epic-games aliexpress
+ * Usage: node run.js <script1> <script2> ...
+ * Example: node run.js prime-gaming gog epic-games aliexpress
  */
 
 import { spawn }                          from 'node:child_process';
@@ -19,7 +19,7 @@ import {
 } from './src/discord.js';
 
 // ---------------------------------------------------------------------------
-// Mapowania
+// Maps
 // ---------------------------------------------------------------------------
 const NAMES = {
   'prime-gaming': 'Prime Gaming',
@@ -37,15 +37,15 @@ const DB_FILES = {
   'aliexpress':   null,
 };
 
-// Skrypty które kończą się kodem != 0 nawet gdy działają poprawnie (upstream quirk).
-// Dla nich kod != 0 traktujemy jako "brak czegoś do zrobienia", nie jako błąd.
+// Scripts that exit with code != 0 even when successful (upstream quirk).
+// For these, != 0 is treated as "nothing to claim" rather than an error.
 const NONZERO_IS_EMPTY = new Set(['aliexpress']);
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-/** Zlicz gry ze statusem 'claimed' w pliku lowdb JSON. */
+/** Count games with 'claimed' status in the lowdb JSON file. */
 const countClaimed = async (file) => {
   if (!file) return 0;
   try {
@@ -57,7 +57,7 @@ const countClaimed = async (file) => {
   }
 };
 
-/** Najnowszy screenshot .png zapisany po czasie `afterMs`. */
+/** Find the newest screenshot .png saved after `afterMs`. */
 const findRecentScreenshot = async (afterMs) => {
   const dir = path.resolve('data', 'screenshots');
   try {
@@ -79,7 +79,7 @@ const findRecentScreenshot = async (afterMs) => {
   }
 };
 
-/** Uruchom skrypt platformy, zwróć exit code. */
+/** Run platform script, return exit code. */
 const runScript = (script) => new Promise(resolve => {
   const proc = spawn('node', [`${script}.js`], { stdio: 'inherit', env: process.env });
   proc.on('exit',  code => resolve(code ?? 1));
@@ -92,18 +92,21 @@ const runScript = (script) => new Promise(resolve => {
 const scripts = process.argv.slice(2);
 
 if (scripts.length === 0) {
-  logger.error('Użycie: node run.js <skrypt1> <skrypt2> ...');
-  logger.error('Przykład: node run.js prime-gaming gog epic-games aliexpress');
+  logger.error('Usage: node run.js <script1> <script2> ...');
+  logger.error('Example: node run.js prime-gaming gog epic-games aliexpress');
   process.exit(1);
 }
 
 const platforms = scripts.map(s => NAMES[s] || s);
-logger.info(`Platformy: ${platforms.join(', ')}`);
+logger.info(`Platforms: ${platforms.join(', ')}`);
 
-// 1. Powiadomienie o starcie kontenera
+// 1. Container start notification
 await notifyOnline(platforms).catch(() => {});
 
-// 2. Każda platforma po kolei
+// Create an array to hold the names of platforms that had no games
+const emptyPlatforms = [];
+
+// 2. Process each platform sequentially
 for (const script of scripts) {
   const name      = NAMES[script] || script;
   const dbFile    = DB_FILES[script];
@@ -117,29 +120,29 @@ for (const script of scripts) {
   const newGames   = countAfter - countBefore;
 
   if (code !== 0 && NONZERO_IS_EMPTY.has(script)) {
-    // Skrypt zakończył się != 0 ale to znane zachowanie (np. aliexpress gdy brak monet)
-    logger.info(`ℹ ${name}: zakończył się kodem ${code} (traktowane jako brak czegoś do zrobienia)`);
-    await notifyEmpty([name]).catch(() => {});
-
+    logger.info(`ℹ ${name}: exited with code ${code} (treated as nothing to claim)`);
+    emptyPlatforms.push(name); // Add to our list instead of notifying immediately
   } else if (code !== 0) {
-    // Rzeczywisty błąd — znajdź screenshot i wyślij powiadomienie
     const screenshot = await findRecentScreenshot(startTime);
-    logger.warn(`✗ ${name} zakończył się kodem ${code}${screenshot ? ' (screenshot dołączony)' : ''}`);
+    logger.warn(`✗ ${name} exited with code ${code}${screenshot ? ' (screenshot attached)' : ''}`);
     await notifyErrorWithScreenshot(
       name,
-      new Error(`Skrypt zakończył się z kodem ${code}`),
+      new Error(`Script exited with code ${code}`),
       screenshot,
     ).catch(() => {});
 
   } else if (newGames <= 0) {
-    // Sukces ale brak nowych gier — util.notify() nie został wywołany, więc my informujemy
-    logger.info(`ℹ ${name}: brak nowych gier`);
-    await notifyEmpty([name]).catch(() => {});
+    logger.info(`ℹ ${name}: no new games`);
+    emptyPlatforms.push(name); // Add to our list instead of notifying immediately
 
   } else {
-    // Gry odebrane — util.notify() w skrypcie platformy już wysłał ✅
-    logger.info(`✓ ${name}: ${newGames} nowych gier (powiadomienie wysłane przez skrypt)`);
+    logger.info(`✓ ${name}: ${newGames} new games (notification sent by script)`);
   }
 }
 
-logger.info('Wszystkie platformy sprawdzone.');
+// 3. Send a single batch notification for all platforms that had no games
+if (emptyPlatforms.length > 0) {
+  await notifyEmpty(emptyPlatforms).catch(() => {});
+}
+
+logger.info('All platforms checked.');
