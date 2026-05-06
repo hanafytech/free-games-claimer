@@ -59,7 +59,7 @@ services:
   free-games-claimer:
     container_name: free-games-claimer-dev
     build:
-      context: https://github.com/DoSpamu/free-games-claimer.git#master
+      context: https://github.com/hanafytech/free-games-claimer.git
     restart: unless-stopped
     ports:
       - "6080:6080"   # noVNC — browser preview
@@ -74,7 +74,7 @@ services:
       sleep $$(( $$(date -d 'tomorrow 07:00' +%s) - $$(date +%s) ))s"
 
     environment:
-      - TZ=Europe/Warsaw
+      - TZ=America/New_York
       - SHOW=1
       - LOG_LEVEL=INFO
 
