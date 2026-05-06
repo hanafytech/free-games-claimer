@@ -1,26 +1,37 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=160&section=header&text=&fontSize=0" />
+<img src="[https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=160&section=header&text=&fontSize=0](https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=160&section=header&text=&fontSize=0)" />
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2800&pause=1000&color=E6EDF3&center=true&vCenter=true&width=620&lines=👾+free-games-claimer;Auto-claims+free+games+every+day;Epic+·+Prime+·+GOG+·+Steam+·+AliExpress;Discord+notifications+🔔;Deploy+with+Docker+🐳" alt="Typing SVG" />
+<img src="[https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2800&pause=1000&color=E6EDF3&center=true&vCenter=true&width=620&lines=](https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2800&pause=1000&color=E6EDF3&center=true&vCenter=true&width=620&lines=)👾+free-games-claimer;Auto-claims+free+games+every+day;Epic+·+Prime+·+GOG+·+Steam+·+AliExpress;Discord+notifications+🔔;Deploy+with+Docker+🐳" alt="Typing SVG" />
 
 <br/>
 
-[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://github.com/DoSpamu/free-games-claimer)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white)]([https://github.com/DoSpamu/free-games-claimer](https://github.com/DoSpamu/free-games-claimer))
 [![Node.js](https://img.shields.io/badge/Node.js-20+-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![Discord](https://img.shields.io/badge/Discord-notifications-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.com)
 [![License](https://img.shields.io/badge/license-MIT-238636?style=flat-square)](LICENSE)
-[![Polish](https://img.shields.io/badge/🇵🇱-Polski-0d1117?style=flat-square)](README.pl.md)
 
 <br/>
 
-> Fork of [vogler/free-games-claimer]([(https://github.com/vogler/free-games-claimer)](https://github.com/vogler/free-games-claimer)) — adds Discord webhooks, slim Dockerfile and structured logging.
+> Fork of [vogler/free-games-claimer](https://github.com/vogler/free-games-claimer) via [DoSpamu](https://github.com/DoSpamu/free-games-claimer).
 
 </div>
 
 ---
 
-## ✨ What this fork adds
+## 🛠️ What THIS fork adds (hanafytech)
+
+This fork builds upon previous versions to add English localization and reduce notification spam.
+
+| | Feature | Details |
+|:---:|---|---|
+| 🇬🇧 | **English Localization** | All Discord webhook notifications have been translated from Polish to English. |
+| 🛑 | **Reduced Spam** | "Nothing to claim" alerts are batched into a single notification to prevent channel spam. |
+| 🐳 | **Updated Stack** | The Portainer stack uses the new repo URL and defaults to `TZ=America/New_York`. |
+
+---
+
+## ✨ Features from the upstream fork (DoSpamu)
 
 | | Feature | Details |
 |:---:|---|---|
@@ -35,7 +46,7 @@
 
 <div align="center">
 
-| <img src="https://github.com/user-attachments/assets/82e9e9bf-b6ac-4f20-91db-36d2c8429cb6" width="40"/><br/>**Epic Games** | <img src="https://github.com/user-attachments/assets/7627a108-20c6-4525-a1d8-5d221ee89d6e" width="40"/><br/>**Prime Gaming** | <img src="https://github.com/user-attachments/assets/49040b50-ee14-4439-8e3c-e93cafd7c3a5" width="40"/><br/>**GOG** | <img src="https://github.com/user-attachments/assets/3582444b-f23b-448d-bf31-01668cd0313a" width="40"/><br/>**Steam** | 🛒<br/>**AliExpress** |
+| <img src="[https://github.com/user-attachments/assets/82e9e9bf-b6ac-4f20-91db-36d2c8429cb6](https://github.com/user-attachments/assets/82e9e9bf-b6ac-4f20-91db-36d2c8429cb6)" width="40"/><br/>**Epic Games** | <img src="[https://github.com/user-attachments/assets/7627a108-20c6-4525-a1d8-5d221ee89d6e](https://github.com/user-attachments/assets/7627a108-20c6-4525-a1d8-5d221ee89d6e)" width="40"/><br/>**Prime Gaming** | <img src="[https://github.com/user-attachments/assets/49040b50-ee14-4439-8e3c-e93cafd7c3a5](https://github.com/user-attachments/assets/49040b50-ee14-4439-8e3c-e93cafd7c3a5)" width="40"/><br/>**GOG** | <img src="[https://github.com/user-attachments/assets/3582444b-f23b-448d-bf31-01668cd0313a](https://github.com/user-attachments/assets/3582444b-f23b-448d-bf31-01668cd0313a)" width="40"/><br/>**Steam** | 🛒<br/>**AliExpress** |
 |:---:|:---:|:---:|:---:|:---:|
 | FreeGames | FreeGames | FreeGames | FreeGames | Points |
 
@@ -126,7 +137,7 @@ Session is saved in the volume (`/mnt/data`) — subsequent runs are fully autom
 |-------|------|
 | 🟢 **Container started** | At the beginning of every run |
 | ✅ **Games claimed** | When a platform claims games (per platform) |
-| ℹ️ **No new games** | When a platform has nothing to claim |
+| ℹ️ **No new games** | When platforms have nothing to claim (batched at end of run) |
 | ❌ **Error + screenshot** | When a platform script exits with an error |
 
 > If `DISCORD_WEBHOOK` is not set — all Discord notifications are skipped, Apprise works normally.
@@ -140,7 +151,7 @@ Session is saved in the volume (`/mnt/data`) — subsequent runs are fully autom
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `TZ` | `Europe/Warsaw` | Container timezone |
+| `TZ` | `America/New_York` | Container timezone |
 | `LOG_LEVEL` | `INFO` | `DEBUG` / `INFO` / `WARN` / `ERROR` |
 | `SHOW` | `1` | Show browser in VNC |
 | `VNC_PASSWORD` | — | Password for noVNC on `:6080` |
@@ -210,20 +221,20 @@ Session is saved in the volume (`/mnt/data`) — subsequent runs are fully autom
 
 </details>
 
-Full list of upstream options: [`src/config.js`](https://github.com/p-adamiec/free-games-claimer/blob/enhanced/src/config.js)
+Full list of upstream options: [`src/config.js`]([https://github.com/p-adamiec/free-games-claimer/blob/enhanced/src/config.js](https://github.com/p-adamiec/free-games-claimer/blob/enhanced/src/config.js))
 
 ---
 
 ## 🕐 Scheduling — no crontab needed
 
-```
+```text
 deploy at 15:00  →  scripts run immediately
                  →  sleep calculates: until tomorrow 07:00 = 16h
 next day 07:00   →  container wakes up → scripts → sleep until next 07:00
 and so on...
 ```
 
-`TZ=Europe/Warsaw` makes `date` calculate time in the correct timezone.
+`TZ=America/New_York` makes `date` calculate time in the correct timezone.
 
 **Override which platforms run:**
 
@@ -258,5 +269,5 @@ Or Portainer → Containers → `free-games-claimer-dev` → Logs.
 See [CHANGES.md](CHANGES.md).
 
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=100&section=footer" />
+<img src="[https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=100&section=footer](https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=100&section=footer)" />
 </div>
