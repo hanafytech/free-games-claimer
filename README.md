@@ -2,7 +2,8 @@
 
 <img src="[https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=160&section=header&text=&fontSize=0](https://capsule-render.vercel.app/api?type=waving&color=7c3aed,06b6d4&height=160&section=header&text=&fontSize=0)" />
 
-<img src="[https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2800&pause=1000&color=E6EDF3&center=true&vCenter=true&width=620&lines=](https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2800&pause=1000&color=E6EDF3&center=true&vCenter=true&width=620&lines=)👾+free-games-claimer;Auto-claims+free+games+every+day;Epic+·+Prime+·+GOG+·+Steam+·+AliExpress;Discord+notifications+🔔;Deploy+with+Docker+🐳" alt="Typing SVG" />
+# 👾 free-games-claimer
+**Auto-claims free games every day (Epic · Prime · GOG · Steam · AliExpress). Deploy with Docker and get Discord notifications.**
 
 <br/>
 
